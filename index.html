@@ -9,7 +9,7 @@
   <style>
     body {
       background: radial-gradient(circle at top, rgba(99, 102, 241, 0.2), transparent 36%),
-        linear-gradient(180deg, #030712 0%, #090a14 100%);
+        linear-gradient(180deg, #09031e 0%, #040406 100%);
     }
   </style>
 </head>
@@ -28,7 +28,7 @@
         <div>
           <label for="destinationTarget" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Target</label>
-          <input id="destinationTarget" name="destinationTarget" type="text" placeholder="Contoh: Malang"
+          <input id="destinationTarget" name="destinationTarget" type="varchar(255)" placeholder="Malang"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
@@ -36,14 +36,14 @@
         <div>
           <label for="destinationCountry" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Country</label>
-          <input id="destinationCountry" name="destinationCountry" type="text" placeholder="Contoh: Indonesia"
+          <input id="destinationCountry" name="destinationCountry" type="varchar(255)" placeholder="Indonesia"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
 
         <div>
           <label for="cameraGear" class="mb-2 block text-sm font-medium text-slate-200">Phone / Gear Camera</label>
-          <input id="cameraGear" name="cameraGear" type="text" placeholder="Contoh: iPhone 17 Pro Max"
+          <input id="cameraGear" name="cameraGear" type="varchar(255)" placeholder="iPhone 17 Pro Max"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
