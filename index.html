@@ -105,9 +105,9 @@
       .from('user_requests')
       .insert([
         {
-          input_destination: target,
-          input_country: country,
-          input_camera_gear: gear
+          destinationTarget: target,
+          destinationCountry: country,
+          cameraGear: gear
         }
       ])
       .select();
