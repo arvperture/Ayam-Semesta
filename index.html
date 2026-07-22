@@ -19,9 +19,9 @@
     <div
       class="w-full rounded-3xl border border-slate-700/80 bg-slate-950/80 p-8 shadow-2xl shadow-slate-900/50 backdrop-blur-xl">
       <header class="mb-8 text-center">
-        <p class="text-sm uppercase tracking-[0.35em] text-indigo-300/80">LookUp Test Input</p>
-        <h1 class="mt-4 text-4xl font-semibold text-white">Masukkan data destinasi & gear</h1>
-        <p class="mt-2 text-slate-400">Hanya untuk pengujian form input AI prompt template.</p>
+        <p class="text-sm uppercase tracking-[0.35em] text-indigo-300/80">LookUp Input Test</p>
+        <h1 class="mt-4 text-4xl font-semibold text-white">Input Your Destination Area & Camera Gear</h1>
+        <p class="mt-2 text-slate-400">Just to test the AI prompt template input.</p>
       </header>
 
       <form id="lookupForm" class="space-y-6">
@@ -70,14 +70,14 @@
     const status = document.getElementById('status');
 
     const buildPrompt = (target, country, gear) => {
-      return `Destination Target: ${target}\nDestination Country: ${country}\nPhone / Gear Camera: ${gear}\n\nGunakan input ini untuk membuat rekomendasi foto dan pengaturan AI.`;
+      return `Destination Target: ${target}\nDestination Country: ${country}\nPhone / Gear Camera: ${gear}\n\nUse this information to generate a detailed AI prompt for photography recommendations.`;
     };
 
     form.addEventListener('input', () => {
       const target = form.destinationTarget.value.trim();
       const country = form.destinationCountry.value.trim();
       const gear = form.cameraGear.value.trim();
-      promptPreview.textContent = buildPrompt(target || '[kosong]', country || '[kosong]', gear || '[kosong]');
+      promptPreview.textContent = buildPrompt(target || '[empty]', country || '[empty]', gear || '[empty]');
     });
 
     form.addEventListener('submit', (event) => {
@@ -87,12 +87,12 @@
       const gear = form.cameraGear.value.trim();
 
       if (!target || !country || !gear) {
-        status.textContent = 'Mohon isi semua field terlebih dahulu.';
+        status.textContent = 'Please fill in all fields first.';
         status.classList.add('text-rose-400');
         return;
       }
 
-      status.textContent = 'Data siap dikirim ke AI...';
+      status.textContent = 'Data is ready to be sent to the AI...';
       status.classList.remove('text-rose-400');
       status.classList.add('text-emerald-300');
 
