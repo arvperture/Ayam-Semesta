@@ -2,8 +2,8 @@
 
 **Version:** 1.0  
 **Date:** July 22, 2026  
-**Status:** Approved / Draft  
-**Author:** Product Engineering Team  
+**Status:** Approved
+**Author:** LookUp's Dev
 
 ---
 
@@ -52,8 +52,8 @@ The platform follows a clean **MVC (Model-View-Controller)** pattern separating 
 All developers must adhere strictly to the following programming principles:
 
 1. **Naming Conventions:**
-   * **CamelCase (`camelCase`):** Used for variables and functions in JavaScript/Frontend (e.g., `totalMatematika`, `getWeatherForecast`, `selectedGearName`).
-   * **Snake Case (`snake_case`):** Used for variables and functions in Python FastAPI and Supabase database columns (e.g., `total_matematika`, `calculate_exposure_triangle`, `light_pollution_score`).
+   * **CamelCase (`camelCase`):** Used for variables and functions in JavaScript/Frontend (e.g., `getWeatherForecast`, `selectedGearName`).
+   * **Snake Case (`snake_case`):** Used for variables and functions in Python FastAPI and Supabase database columns (e.g., `calculate_exposure_triangle`, `light_pollution_score`).
    * **PascalCase (`PascalCase`):** Used for Classes and Type Interfaces in Python/JS (e.g., `LocationController`, `GearSpecification`).
    * **Descriptive Naming:** Single-letter or vague variable names like `$x`, `$data`, `temp`, or `val` are strictly forbidden.
 
@@ -83,7 +83,7 @@ The system executes a 10-step automated pipeline:
 
 ### Detailed Sequential Steps (1 - 10):
 1. **Frontend Input:** User submits required parameters:
-   * Target Location (e.g., "Baturraden")
+   * Target Location (e.g., "Malang")
    * Country (e.g., "Indonesia")
    * Gear Name (e.g., "Sony A7 III" or "iPhone 15 Pro") - *Gear name only, no specs required from user*.
    * Shooting Objective (*Static Photo*, *Lightrails*, *Video [FPS]*, or *Timelapse*).
