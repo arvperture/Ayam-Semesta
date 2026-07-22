@@ -6,10 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>LookUp AI Test Input</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
       background: radial-gradient(circle at top, rgba(99, 102, 241, 0.2), transparent 36%),
-        linear-gradient(180deg, #09031e 0%, #040406 100%);
+        linear-gradient(180deg, #030712 0%, #090a14 100%);
     }
   </style>
 </head>
@@ -28,7 +29,7 @@
         <div>
           <label for="destinationTarget" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Target</label>
-          <input id="destinationTarget" name="destinationTarget" type="varchar(255)" placeholder="Malang"
+          <input id="destinationTarget" name="destinationTarget" type="text" placeholder="Contoh: Malang"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
@@ -36,14 +37,14 @@
         <div>
           <label for="destinationCountry" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Country</label>
-          <input id="destinationCountry" name="destinationCountry" type="varchar(255)" placeholder="Indonesia"
+          <input id="destinationCountry" name="destinationCountry" type="text" placeholder="Contoh: Indonesia"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
 
         <div>
           <label for="cameraGear" class="mb-2 block text-sm font-medium text-slate-200">Phone / Gear Camera</label>
-          <input id="cameraGear" name="cameraGear" type="varchar(255)" placeholder="iPhone 17 Pro Max"
+          <input id="cameraGear" name="cameraGear" type="text" placeholder="Contoh: iPhone 17 Pro Max"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
@@ -65,6 +66,10 @@
   </div>
 
   <script>
+    const SUPABASE_URL = 'https://qidnvwyagidmnlafsaer.supabase.co/';
+    const SUPABASE_ANON_KEY = 'sb_secret_umaAqrrJV4Fbl-5Pr-JYYQ_wcftRK74';
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
     const form = document.getElementById('lookupForm');
     const promptPreview = document.getElementById('promptPreview');
     const status = document.getElementById('status');
@@ -80,7 +85,7 @@
       promptPreview.textContent = buildPrompt(target || '[empty]', country || '[empty]', gear || '[empty]');
     });
 
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const target = form.destinationTarget.value.trim();
       const country = form.destinationCountry.value.trim();
@@ -96,6 +101,24 @@
       status.classList.remove('text-rose-400');
       status.classList.add('text-emerald-300');
 
+      const { data, error } = await supabase
+      .from('analysis_sessions')
+      .insert([
+        {
+          input_destination: target,
+          input_country: country,
+          input_camera_gear: gear
+        }
+      ])
+      .select();
+
+      if (error) {
+        console.error('Error Supabase:', error.message);
+        status.textContent = 'Gagal menyimpan data: ' + error.message;
+        status.classList.add('text-rose-400');
+        return;
+      }
+    
       const payload = {
         destinationTarget: target,
         destinationCountry: country,
@@ -112,3 +135,4 @@
 </body>
 
 </html>
+
