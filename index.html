@@ -67,8 +67,8 @@
 
   <script>
     const SUPABASE_URL = 'https://qidnvwyagidmnlafsaer.supabase.co/';
-    const SUPABASE_ANON_KEY = 'SUPABASE_ANON_KEY';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFpZG52d3lhZ2lkbW5sYWZzYWVyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODQ0NDMyNTAsImV4cCI6MjEwMDAxOTI1MH0.BF1QZhrLf9N4TNewm8wuM6cGoUHZK7-F3erMkKZM0cI';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const form = document.getElementById('lookupForm');
     const promptPreview = document.getElementById('promptPreview');
@@ -101,7 +101,7 @@
       status.classList.remove('text-rose-400');
       status.classList.add('text-emerald-300');
 
-      const { data, error } = await supabase
+      const { data, error } = await supabaseClient
       .from('user_requests')
       .insert([
         {
@@ -135,5 +135,3 @@
 </body>
 
 </html>
-
-//wleowleowleo
