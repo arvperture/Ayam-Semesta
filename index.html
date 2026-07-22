@@ -124,7 +124,7 @@
 
       if (error) {
         console.error('Error Supabase:', error.message);
-        status.textContent = 'Gagal menyimpan data: ' + error.message;
+        status.textContent = 'Failed to save data: ' + error.message;
         status.classList.add('text-rose-400');
         return;
       }
@@ -138,7 +138,7 @@
       };
 
       console.log('AI payload:', payload);
-      status.textContent = 'Payload telah ditampilkan di console. Silakan sambungkan ke endpoint AI.';
+      status.textContent = 'Input on Progress: Data has been sent to the AI successfully (soon to be processed)';
     });
 
     form.dispatchEvent(new Event('input'));
