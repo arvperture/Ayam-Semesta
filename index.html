@@ -29,7 +29,7 @@
         <div>
           <label for="destinationTarget" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Target</label>
-          <input id="destinationTarget" name="destinationTarget" type="text" placeholder="Contoh: Malang"
+          <input id="destinationTarget" name="destinationTarget" type="varchar(255)" placeholder="Malang"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
@@ -37,14 +37,21 @@
         <div>
           <label for="destinationCountry" class="mb-2 block text-sm font-medium text-slate-200">Destination
             Country</label>
-          <input id="destinationCountry" name="destinationCountry" type="text" placeholder="Contoh: Indonesia"
+          <input id="destinationCountry" name="destinationCountry" type="varchar(255)" placeholder="Indonesia"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
 
         <div>
           <label for="cameraGear" class="mb-2 block text-sm font-medium text-slate-200">Phone / Gear Camera</label>
-          <input id="cameraGear" name="cameraGear" type="text" placeholder="Contoh: iPhone 17 Pro Max"
+          <input id="cameraGear" name="cameraGear" type="varchar(255)" placeholder="iPhone 17 Pro Max"
+            class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
+            required />
+        </div>
+
+        <div>
+          <label for="shootingTarget" class="mb-2 block text-sm font-medium text-slate-200">Shooting Purpose</label>
+          <input id="shootingTarget" name="shootingTarget" type="varchar(50)" placeholder="I want shoot a milkyway with a mountain scenery"
             class="w-full rounded-2xl border border-slate-700 bg-slate-900/90 px-4 py-3 text-slate-100 outline-none transition focus:border-indigo-400 focus:ring-2 focus:ring-indigo-400/20"
             required />
         </div>
@@ -74,15 +81,16 @@
     const promptPreview = document.getElementById('promptPreview');
     const status = document.getElementById('status');
 
-    const buildPrompt = (target, country, gear) => {
-      return `Destination Target: ${target}\nDestination Country: ${country}\nPhone / Gear Camera: ${gear}\n\nUse this information to generate a detailed AI prompt for photography recommendations.`;
+    const buildPrompt = (target, country, gear, purpose) => {
+      return `Destination Target: ${target}\nDestination Country: ${country}\nPhone / Gear Camera: ${gear}\nPurpose: ${purpose}\n\nUse this information to generate a detailed AI prompt for photography recommendations.`;
     };
 
     form.addEventListener('input', () => {
       const target = form.destinationTarget.value.trim();
       const country = form.destinationCountry.value.trim();
       const gear = form.cameraGear.value.trim();
-      promptPreview.textContent = buildPrompt(target || '[empty]', country || '[empty]', gear || '[empty]');
+      const purpose = form.shootingTarget.value.trim();
+      promptPreview.textContent = buildPrompt(target || 'Please Input', country || 'Please Input', gear || 'Please Input', purpose || 'Please Input');
     });
 
     form.addEventListener('submit', async (event) => {
@@ -90,8 +98,9 @@
       const target = form.destinationTarget.value.trim();
       const country = form.destinationCountry.value.trim();
       const gear = form.cameraGear.value.trim();
+      const purpose = form.shootingTarget.value.trim();
 
-      if (!target || !country || !gear) {
+      if (!target || !country || !gear || !purpose) {
         status.textContent = 'Please fill in all fields first.';
         status.classList.add('text-rose-400');
         return;
@@ -107,7 +116,8 @@
         {
           destinationTarget: target,
           destinationCountry: country,
-          cameraGear: gear
+          cameraGear: gear,
+          shootingTarget: purpose
         }
       ])
       .select();
@@ -123,7 +133,8 @@
         destinationTarget: target,
         destinationCountry: country,
         cameraGear: gear,
-        promptText: buildPrompt(target, country, gear),
+        shootingTarget: purpose,
+        promptText: buildPrompt(target, country, gear, purpose),
       };
 
       console.log('AI payload:', payload);
