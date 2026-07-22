@@ -102,7 +102,7 @@
       status.classList.add('text-emerald-300');
 
       const { data, error } = await supabase
-      .from('analysis_sessions')
+      .from('user_requests')
       .insert([
         {
           input_destination: target,
